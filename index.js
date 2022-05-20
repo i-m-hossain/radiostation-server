@@ -51,7 +51,7 @@ async function run() {
         });
 
         //add station
-        app.post("/stations", isLoggedIn, async (req, res) => {
+        app.post("/stations", async (req, res) => {
             const { name, frequency } = req.body;
             const query = { name, frequency };
             const result = await stations.insertOne(query);
@@ -61,7 +61,7 @@ async function run() {
             });
         });
         //update station
-        app.put("/stations/:id", isLoggedIn, async (req, res) => {
+        app.put("/stations/:id", async (req, res) => {
             const stationId = req.params.id;
             const document = req.body;
             const filter = { _id: ObjectId(stationId) };
@@ -75,7 +75,7 @@ async function run() {
             res.json(result);
         });
         //delete station
-        app.delete("/stations/:id", isLoggedIn, async (req, res) => {
+        app.delete("/stations/:id", async (req, res) => {
             const stationId = req.params.id;
             const query = { _id: ObjectId(stationId) };
             const result = await stations.deleteOne(query);
